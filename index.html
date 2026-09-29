@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Picker Wheel</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-theme="white">
+  <div id="themeDecor" class="theme-decor" aria-hidden="true"></div>
+  <div class="app">
+    <header class="top-bar">
+      <div class="brand">
+        <span class="brand-icon" aria-hidden="true">◎</span>
+        <h1>Picker Wheel Special for IMW</h1>
+      </div>
+      <div class="top-controls">
+        <label class="control-group">
+          <span class="control-label">Preset</span>
+          <select id="presetSelect" aria-label="Select preset">
+            <option value="teamA">Team A</option>
+            <option value="teamB">Team B</option>
+            <option value="teamAB">Team A + Team B</option>
+            <option value="fullIMW">Full IMW</option>
+            <option value="custom">Custom</option>
+          </select>
+        </label>
+        <label class="control-group">
+          <span class="control-label">Theme</span>
+          <select id="themeSelect" aria-label="Select theme">
+            <option value="white">White</option>
+            <option value="black">Black</option>
+            <option value="casino">Casino</option>
+            <option value="radio">Radio / Network</option>
+          </select>
+        </label>
+        <button type="button" id="resetPresetBtn" class="btn btn-secondary">Reset to default</button>
+        <button type="button" id="resetAllBtn" class="btn btn-ghost">Reset all</button>
+      </div>
+    </header>
+
+    <main class="main-layout">
+      <section class="wheel-section card">
+        <div class="wheel-wrap">
+          <div class="pointer" aria-hidden="true"></div>
+          <canvas id="wheelCanvas" width="480" height="480" role="img" aria-label="Picker wheel"></canvas>
+          <div id="wheelEmpty" class="wheel-empty hidden">
+            <p>Add at least 2 active participants to spin.</p>
+          </div>
+        </div>
+        <button type="button" id="spinBtn" class="btn btn-spin">SPIN</button>
+
+        <div id="winnerArea" class="winner-area hidden" aria-live="polite">
+          <div id="winnerFx" class="winner-fx" aria-hidden="true"></div>
+          <p class="winner-label" id="winnerLabel">🎉 WINNER 🎉</p>
+          <p class="winner-name" id="winnerName"></p>
+          <p class="winner-theme-tag hidden" id="winnerThemeTag"></p>
+          <div class="winner-actions">
+            <button type="button" id="removeWinnerBtn" class="btn btn-secondary">Remove winner</button>
+            <button type="button" id="keepWinnerBtn" class="btn btn-ghost">Keep &amp; spin again</button>
+          </div>
+        </div>
+
+        <div class="history card-inner">
+          <h2 class="history-title">Last winners</h2>
+          <ol id="winnerHistory" class="history-list"></ol>
+          <p id="historyEmpty" class="history-empty">No spins yet.</p>
+        </div>
+      </section>
+
+      <aside class="participants-section card">
+        <div class="participants-header">
+          <h2>Participants</h2>
+          <span id="activeCount" class="badge">0 active</span>
+        </div>
+        <ul id="participantList" class="participant-list"></ul>
+        <div id="addPersonRow" class="add-person hidden">
+          <input type="text" id="newPersonInput" maxlength="80" placeholder="Enter name" autocomplete="off">
+          <button type="button" id="confirmAddBtn" class="btn btn-primary">Add</button>
+          <button type="button" id="cancelAddBtn" class="btn btn-ghost">Cancel</button>
+        </div>
+        <button type="button" id="addPersonBtn" class="btn btn-primary btn-block">+ Add person</button>
+        <p class="hint">Uncheck to exclude from the wheel without removing.</p>
+      </aside>
+    </main>
+  </div>
+
+  <div id="confettiLayer" class="confetti-layer" aria-hidden="true"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
